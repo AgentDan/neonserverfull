@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./ProjectPage.css";
 import Model from "./Model.jsx";
 import {v1} from "uuid";
-import {Elements} from "../state/state.jsx";
+import {Elements} from "../state/stateCard.jsx";
 
 const ProjectPage = () => {
     const [elem, setElem] = useState([])

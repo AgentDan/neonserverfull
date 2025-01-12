@@ -12,19 +12,22 @@ const Overlay = () => {
                         <h2 className=" absolute mt-12 text-center text-[10vw]  text-white font-extrabold">HELLO22</h2>
                     </div>
                     <div className="h-screen border-2 border-black">
-                        <a href="/shop">
-                            <h1 className="absolute text-white font-bold">Component 2</h1>
+                        <a href="/constructor">
+                            <h1 className="absolute text-white font-bold">Constructor</h1>
                         </a>
-                        <h2 className=" absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component  2</h2>
+                        <h2 className=" absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component
+                            2</h2>
                     </div>
                     <div className="h-screen border-2 border-red-500">
-                        <h2 className="content-center absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component 3</h2>
+                        <h2 className="content-center absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component
+                            3</h2>
                         <a href="/card">
                             <div className="absolute h-[20px] w-[100px] bg-green-300">Card</div>
                         </a>
                     </div>
                     <div className="h-screen  border-2 border-black text-center">
-                        <h2 className=" absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component 4</h2>
+                        <h2 className=" absolute mt-12 text-center text-[10vw]  text-white font-extrabold">Component
+                            4</h2>
                     </div>
                     <div className="h-screen border-2 border-black">
                         <h1 className="absolute text-white font-bold">Component 5</h1>
@@ -34,7 +37,10 @@ const Overlay = () => {
                             button</h2>
                     </div>
                     <div className="border-2 border-black">
-                        <h1 className="text-white font-bold">Component 6</h1>
+                        <a href="/login">
+                            <div className="absolute h-[20px] w-[100px] bg-green-300">LOGIN</div>
+                        </a>
+                        <h1 className="text-white font-bold"> Component 6</h1>
                     </div>
                     <div className="h-screen border-2 border-black">
                         <h1 className="absolute text-white font-bold">Component 7</h1>
