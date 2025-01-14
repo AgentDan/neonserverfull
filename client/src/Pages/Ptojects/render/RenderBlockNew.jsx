@@ -9,6 +9,7 @@ const RenderBlockNew = () => {
     arrNew.projects.map((t) => t.id === idProject ? defoultProject = t.def : "")
     return (
         <>
+            {/*<Suspense>*/}
             <Suspense fallback={<Box/>}>
                 {
                     defoultProject.map((j)=>{

@@ -11,7 +11,7 @@ const Projects = () => {
             </Canvas>
             <PanelProjectsTailwind/>
         </div>
-    );
-};
+    )
+}
 
 export default Projects;

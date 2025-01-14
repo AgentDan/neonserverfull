@@ -8,7 +8,6 @@ export const Experience = () => {
                 intensity={0.2}
                 environment="city"
                 shadows={{
-                    // type: "accumulative",
                     color: "#d9afd9",
                     colorBlend: 1,
                     opacity: 1,

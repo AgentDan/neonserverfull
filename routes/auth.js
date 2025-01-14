@@ -50,8 +50,6 @@ router.post('/login',
         check('password', 'Некорректный пароль').exists()
     ],
     async (req, res) => {
-        console.log("HELLO")
-        res.json({message: "HELLO"})
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
