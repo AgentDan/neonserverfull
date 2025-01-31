@@ -1,390 +1,378 @@
-import {Suspense, useMemo, useRef, forwardRef, useState, useLayoutEffect, useEffect} from 'react';
-import {Box, Float, Html, PerspectiveCamera, useGLTF, useProgress, useScroll} from "@react-three/drei";
-import * as THREE from "three";
+import React, {useContext, useLayoutEffect, useRef, useState} from 'react';
 import {useFrame} from "@react-three/fiber";
-import {Vector3} from "three";
 import gsap from "gsap";
-
-const LINE_NB_POINTS = 24000;
-
-const MovingTarget = forwardRef((props, ref) => {
-    // Анимация цели (движение по кругу)
-    useFrame(({clock}) => {
-        const t = clock.getElapsedTime();
-        if (ref.current) {
-            ref.current.position.set(100 + Math.sin(-t) * 10, -170, -300 + Math.cos(t) * 30);
-        }
-    });
-    return (
-        <mesh ref={ref} visible={true}>
-            <sphereGeometry args={[0.2, 32, 32]}/>
-            <meshStandardMaterial color="red"/>
-        </mesh>
-    );
-});
-
-const MovingTarget2 = forwardRef((props, ref) => {
-    // Анимация цели (движение по кругу)
-    useFrame(({clock}) => {
-        const t = clock.getElapsedTime();
-        if (ref.current) {
-            ref.current.position.set(1 + Math.sin(-t) * 20, -40, -800 + Math.cos(t) * -55);
-        }
-    });
-    return (
-        <mesh ref={ref} visible={true}>
-            <sphereGeometry args={[0.2, 32, 32]}/>
-            <meshStandardMaterial color="red"/>
-        </mesh>
-    );
-});
-
-const MovingTarget3 = forwardRef((props, ref) => {
-    // Анимация цели (движение по кругу)
-    useFrame(({clock}) => {
-        const t = clock.getElapsedTime();
-        if (ref.current) {
-            ref.current.position.set(1 + Math.sin(-t) * 60, -40, -2150 + Math.cos(t) * -55);
-        }
-    });
-    return (
-        <mesh ref={ref} visible={true}>
-            <sphereGeometry args={[0.2, 32, 32]}/>
-            <meshStandardMaterial color="red"/>
-        </mesh>
-    );
-});
-
-const MovingTarget4 = forwardRef((props, ref) => {
-    // Анимация цели (движение по кругу)
-    useFrame(({clock}) => {
-        const t = clock.getElapsedTime();
-        if (ref.current) {
-            ref.current.position.set(1 + Math.sin(-t) * 20, -40, -1950 + Math.cos(t) * 55);
-        }
-    });
-    return (
-        <mesh ref={ref} visible={true}>
-            <sphereGeometry args={[0.2, 32, 32]}/>
-            <meshStandardMaterial color="red"/>
-        </mesh>
-    );
-});
+import {useGLTF, useScroll, PerspectiveCamera, Text} from "@react-three/drei";
+import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext.js";
 
 const One = () => {
-    const [lightOne, setLightOne] = useState()
-    const scroll = useScroll()
     const tl = useRef()
     const tableRef = useRef()
-    const spotRef = useRef()
-    const boxRefTwo = useRef()
-    const neonRef = useRef()
-    const page4Ref = useRef()
-    const page5video1 = useRef()
-    const page5video2 = useRef()
+    const spotLightRef = useRef()
+    const sceneRef = useRef()
+    const cameraRef = useRef()
+    const butRef = useRef()
+    const smartpanelRef = useRef()
+    const smartdeskRef = useRef()
+    const deskRef = useRef()
+    const smartbuttonRef = useRef()
+    const smartusbRef = useRef()
+    const smartrackRef = useRef()
+    const rackRef = useRef()
 
-    const spotlightRef = useRef();
-    const spotlightRef2 = useRef();
-    const spotlightRef3 = useRef();
-    const spotlightRef4 = useRef();
+    const navigate = useNavigate()
+    const {logoName} = useContext(AuthContext)
+    const [mycolor, setMycolor] = useState({one: "gray", two: "gray", three: "gray", four: "gray"})
 
-    const targetRef = useRef();
-    const targetRef2 = useRef();
-    const targetRef3 = useRef();
-    const targetRef4 = useRef();
+    const scroll = useScroll()
+    const {nodes, materials} = useGLTF("./assets/models/roomPoints.glb")
 
-    const Loader = () => {
-        const {progress} = useProgress()
-        return <Html>{Math.floor(progress)}% Loaded ...</Html>
-    }
-
-    const {nodes, materials} = useGLTF("./assets/models/table.glb");
-    const cameraGroup = useRef()
-    const boxRef = useRef()
-    const curve = useMemo(() => {
-        return new THREE.CatmullRomCurve3(
-            [
-                new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(50, -100, -110),
-                new THREE.Vector3(50, -100, -200),
-                new THREE.Vector3(100, -150, -300),
-                new THREE.Vector3(150, -200, -400),
-                new THREE.Vector3(200, -100, -500),
-                new THREE.Vector3(215, -100, -600),
-                new THREE.Vector3(0, 0, -700),
-                new THREE.Vector3(0, 0, -800),
-                new THREE.Vector3(-100, 0, -900),
-                new THREE.Vector3(-150, 0, -1000),
-                new THREE.Vector3(-200, 10, -1110),
-                new THREE.Vector3(-100, 100, -1220),
-                new THREE.Vector3(-100, 100, -1330),
-                new THREE.Vector3(-50, 100, -1440),
-                new THREE.Vector3(-250, 10, -1550),
-                new THREE.Vector3(-250, 120, -1660),
-                new THREE.Vector3(-20, 50, -1770),
-                new THREE.Vector3(20, -10, -1880),
-                new THREE.Vector3(100, 0, -1990),
-                new THREE.Vector3(200, 0, -2100),
-                new THREE.Vector3(300, 0, -2200),
-            ],
-            false,
-            "catmullrom",
-            0.5
-        );
-    }, []);
-
-    const linePoints = useMemo(() => {
-        return curve.getPoints(LINE_NB_POINTS);
-    }, [curve]);
-
-    const shape = useMemo(() => {
-        const shape = new THREE.Shape();
-        shape.moveTo(0, -0.2);
-        shape.lineTo(0, 0.2);
-        return shape;
-    }, [curve]);
-
-    useFrame((_state, delta) => {
-
-        const curPointIndex = Math.min(
-            Math.round(scroll.offset * linePoints.length),
-            linePoints.length - 1
-        )
-
-        let boxPointIndex
-        if (curPointIndex < 23000) {
-            boxPointIndex = curPointIndex + 1000
-        } else {
-            boxPointIndex = 24000
-        }
-        const boxIndex = linePoints[boxPointIndex]
-        const curPoint = linePoints[curPointIndex]
-        setLightOne(curPointIndex)
-
-        cameraGroup.current.position.lerp(curPoint, delta * 24);
-
-        boxRef.current.position.x = boxIndex.x
-        boxRef.current.position.y = boxIndex.y
-        boxRef.current.position.z = boxIndex.z
-
-        const vec = new Vector3(boxIndex.x, boxIndex.y, boxIndex.z)
-
-        cameraGroup.current.lookAt(vec);
-
-        if (spotlightRef.current && targetRef.current) {
-            spotlightRef.current.target = targetRef.current;
-            spotlightRef.current.target.updateMatrixWorld(); // Обновляем матрицу для корректной привязки
-        }
-        if (spotlightRef2.current && targetRef2.current) {
-            spotlightRef2.current.target = targetRef2.current;
-            spotlightRef2.current.target.updateMatrixWorld(); // Обновляем матрицу для корректной привязки
-        }
-        if (spotlightRef3.current && targetRef3.current) {
-            spotlightRef3.current.target = targetRef3.current;
-            spotlightRef3.current.target.updateMatrixWorld(); // Обновляем матрицу для корректной привязки
-        }
-        if (spotlightRef4.current && targetRef4.current) {
-            spotlightRef4.current.target = targetRef4.current;
-            spotlightRef4.current.target.updateMatrixWorld(); // Обновляем матрицу для корректной привязки
-        }
-
+    useFrame(() => {
         tl.current.seek(scroll.offset * tl.current.duration())
     })
 
     useLayoutEffect(() => {
-        page4Ref.current = document.getElementById("page4")
-        page5video1.current = document.getElementById("page5video1")
-        page5video2.current = document.getElementById("page5video2")
-        let mm = gsap.matchMedia();
+        tl.current = gsap.timeline({defaults: {duration: 2, ease: "power1.inOut"}});
+        tl.current
+            .to(sceneRef.current.position, {x: -30, y: 4, z: -20}, 0)
 
-        mm.add({
-            isDesktop: `(min-width: 48em)`,
-            isMobile: `(max-width: 48em`,
+            .to(sceneRef.current.position, {x: 49, y: 5, z: -20}, 3)
 
-        }, (context) => {
+            .to(smartdeskRef.current.children[0].material, {opacity: 1}, 3)
+            .to(smartdeskRef.current.children[1].material, {opacity: 1}, 3)
+            .to(smartdeskRef.current.children[2].material, {opacity: 1}, 3)
+            .to(smartbuttonRef.current.children[0].material, {opacity: 1}, 3)
+            .to(smartusbRef.current.children[0].material, {opacity: 1}, 3)
+            .to(smartpanelRef.current.children[0].material, {opacity: 1}, 3)
+            .to(deskRef.current.children[0].material, {opacity: 0}, 3)
 
-            let {isDesktop, isMobile} = context.conditions;
+            .to(sceneRef.current.rotation, {y: -Math.PI / 3}, 3.6)
 
-            // Создаем таймлайн
-            tl.current = gsap.timeline({defaults: {duration: 2, ease: "power1.inOut"}});
+            .to(sceneRef.current.position, {x: 69, y: 8, z: -27.7}, 5)
+            .to(smartdeskRef.current.children[0].material, {opacity: 0}, 5)
+            .to(smartdeskRef.current.children[1].material, {opacity: 0}, 5)
+            .to(smartdeskRef.current.children[2].material, {opacity: 0}, 5)
+            .to(deskRef.current.children[0].material, {opacity: 1}, 5.5)
 
-            // Добавляем анимации
-            tl.current
-                .to(page4Ref.current, {fontSize: isMobile ? "300%" : "100%"}, 0)
-                .to(page5video1.current, {hidden: isMobile ? true : false}, 0)
-                .to(page5video2.current, {hidden: isDesktop ? true : false }, 0)
-                .to(page4Ref.current, { transform: isMobile ? "translateX(-630%)" : "translateX(-150%)"}, 13)
-                .to(page4Ref.current, { transform: "translateX(-150%)", scrollTrigger: {pin: true}}, 13)
-                .to(neonRef.current, {visible: false}, 3.8) // Прозрачность материала
-                .to(neonRef.current.children[0].material, {opacity: 0}, 4.3) // Прозрачность материала
-                .to(tableRef.current.children[0].material, {opacity: 1}, 4) // Прозрачность материала
-                .to(neonRef.current.children[0].material, {opacity: 1}, 40) // Прозрачность материала
+            .to(sceneRef.current.position, {x: 67.8, y: 8, z: -26.4}, 8)
 
-            return () => {
-                tl.current?.kill(); // Уничтожаем таймлайн при размонтировании
-            };
+            .to(sceneRef.current.position, {x: 65.5, y: 8.2, z: -17.9}, 11)
 
-        });
-        console.log(page4Ref.current)
+            .to(sceneRef.current.position, {x: 50, y: 4, z: -19.5}, 14)
+            .to(smartdeskRef.current.children[0].material, {opacity: 1}, 14)
+            .to(smartdeskRef.current.children[1].material, {opacity: 1}, 14)
+            .to(smartdeskRef.current.children[2].material, {opacity: 1}, 14)
+            .to(deskRef.current.children[0].material, {opacity: 0}, 14)
 
-    }, []);
+            .to(sceneRef.current.rotation, {y: 1}, 16)
+            .to(sceneRef.current.position, {x: 35, y: 3, z: -17}, 16)
+
+            .to(sceneRef.current.position, {x: 53, y: 2.5, z: -14}, 19)
+            .to(smartrackRef.current.children[0].material, {opacity: 1}, 19)
+            .to(rackRef.current.children[0].material, {opacity: 0}, 19)
+
+            .to(sceneRef.current.position, {x: 45, y: 2, z: -19}, 22)
+            .to(sceneRef.current.rotation, {y: -1}, 22)
+        return () => {
+            tl.current?.kill();
+        };
+    }, [])
 
     return (
         <>
-            {/*<spotLight*/}
-            {/*    ref={spotlightRef}*/}
-            {/*    position={[100, -140, -300]}*/}
-            {/*    angle={0.9}*/}
-            {/*    penumbra={0.8}*/}
-            {/*    intensity={1000}*/}
-            {/*/>*/}
-            {/*<spotLight*/}
-            {/*    ref={spotlightRef2}*/}
-            {/*    position={[1, 10, -800]}*/}
-            {/*    angle={0.9}*/}
-            {/*    penumbra={0.8}*/}
-            {/*    intensity={1000}*/}
-            {/*    castShadow*/}
-            {/*    shadow-mapSize-width={1024}*/}
-            {/*    shadow-mapSize-height={1024}*/}
-            {/*    shadow-bias={-0.0001}*/}
-            {/*/>*/}
-            {/*<spotLight*/}
-            {/*    ref={spotlightRef3}*/}
-            {/*    position={[10, 10, -2150]}*/}
-            {/*    angle={0.9}*/}
-            {/*    penumbra={0.8}*/}
-            {/*    intensity={1000000}*/}
-            {/*    castShadow*/}
-            {/*    shadow-mapSize-width={1024}*/}
-            {/*    shadow-mapSize-height={1024}*/}
-            {/*    shadow-bias={-0.0001}*/}
-            {/*/>*/}
-            {/*<spotLight*/}
-            {/*    ref={spotlightRef4}*/}
-            {/*    position={[10, 10, -1900]}*/}
-            {/*    angle={0.9}*/}
-            {/*    penumbra={0.8}*/}
-            {/*    intensity={1000000}*/}
-            {/*    castShadow*/}
-            {/*    shadow-mapSize-width={1024}*/}
-            {/*    shadow-mapSize-height={1024}*/}
-            {/*    shadow-bias={-0.0001}*/}
-            {/*/>*/}
-            {/*<spotLight*/}
-            {/*    ref={spotRef}*/}
-            {/*    position={[100, -138, -300]}*/}
-            {/*    angle={0.9}*/}
-            {/*    penumbra={0.9}*/}
-            {/*    intensity={1000}*/}
-            {/*/>*/}
+            <PerspectiveCamera
+                ref={cameraRef}
+                rotation={[0, 1.7, 0]}
+                position={[60, 15, -12.5]}
+                fov={75}
+                near={0.1}
+                far={1000}
+                makeDefault
+            />
 
-            <MovingTarget ref={targetRef}/>
-            <MovingTarget2 ref={targetRef2}/>
-            <MovingTarget3 ref={targetRef3}/>
-            <MovingTarget4 ref={targetRef4}/>
+            <group ref={sceneRef}>
 
-            <Suspense fallback={<Loader/>}>
-                <group ref={cameraGroup}>
-                    <PerspectiveCamera rotation-y={Math.PI} position={[0, 1.4, -15]} fov={30} makeDefault/>
-                    <group scale={[0.5, 0.5, 0.5]} position={[0, 1, -3]}>
-                        <Float floatIntensity={9} speed={7}>
-                            {/*<mesh geometry={nodes.cube.geometry} material={materials["material"]}/>*/}
-                        </Float>
-                    </group>
-                </group>
-                <Box ref={boxRef} position={[0, 0, -10]} visible={false}>
-                    <meshStandardMaterial color="red"/>
-                </Box>
-                <group ref={tableRef} position={[103, -136, -300]} rotation-y={Math.PI / 2}>
+                <group ref={smartdeskRef}>
                     <mesh
-                        geometry={nodes.table.geometry}
-                        material={materials.three}
-                        position={[-9, -6, -4]}
+                        geometry={nodes.smartdesk.geometry}
+                        material={materials.smartdesk}
                         castShadow
                         receiveShadow
                         material-opacity={0}
                         material-transparent={true}
-                    >
-                    </mesh>
+                    />
+                    <mesh
+                        geometry={nodes.smartleg.geometry}
+                        material={materials.smartleg}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                    <mesh
+                        geometry={nodes.smartalice.geometry}
+                        material={materials.smartalice}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                    <mesh
+                        geometry={nodes.smartusb.geometry}
+                        material={materials.smartusb}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
                 </group>
 
-                <group ref={neonRef} position={[103, -136, -300]} rotation-y={Math.PI / 2} visible={true}>
+                <group ref={smartpanelRef}>
                     <mesh
-                        geometry={nodes.neon.geometry}
-                        position={[-9, -6, -4]}
-                    >
+                        geometry={nodes.smartpanel.geometry}
+                        material={materials.smartpanel}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                </group>
+
+                <group ref={smartrackRef}>
+                    <mesh
+                        geometry={nodes.smartrack.geometry}
+                        material={materials.smartrack}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                </group>
+
+                <group ref={smartusbRef}>
+                    <mesh
+                        geometry={nodes.smartusb.geometry}
+                        material={materials.smartusb}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                </group>
+
+                <group ref={smartbuttonRef}>
+                    <mesh
+                        geometry={nodes.smartbutton.geometry}
+                        material={materials.smartbutton}
+                        castShadow
+                        receiveShadow
+                        material-opacity={0}
+                        material-transparent={true}
+                    />
+                </group>
+
+                <points>
+                    <bufferGeometry {...nodes.roompoints.geometry} />
+                    <pointsMaterial
+                        transparent
+                        color="#41424C"
+                        size={0.01}
+                        sizeAttenuation={true}
+                        depthWrite={false}
+                        opacity={0.01}
+                    />
+                </points>
+                <group ref={rackRef}>
+                    <points>
+                        <bufferGeometry {...nodes.rack.geometry} />
+                        <pointsMaterial
+                            transparent
+                            color="#41424C"
+                            size={0.01}
+                            sizeAttenuation={true}
+                            depthWrite={false}
+                            opacity={0.04}
+                        />
+                    </points>
+                </group>
+                <group>
+                    <mesh geometry={nodes.ramka.geometry}>
                         <meshStandardMaterial
-                            opacity={1}
-                            transparent={true}
-                            color="aqua"
-                            emissive="aqua"
-                            emissiveIntensity={1}
-                            toneMapped={false}
+                            transparent
+                            opacity={0.5}
+                            color="grey"
                         />
                     </mesh>
                 </group>
-
-                <group position={[103, -136, -300]} rotation-y={Math.PI / 2}>
-                    <mesh
-                        geometry={nodes.usb.geometry}
-                        material={materials.usb}
-                        position={[-9, -6, -4]}
-                        castShadow
-                        receiveShadow
+                <group>
+                    <Text
+                        position={[40, 15.4, -11.3]}
+                        rotation={[0, Math.PI / 2, 0]}
+                        fontSize={0.4}
+                        color="black"
+                        anchorX="left"
+                        anchorY="middle"
                     >
+                        User: {logoName ? logoName : "no registration"}
+                    </Text>
+                    <mesh
+                        geometry={nodes.ramkafonconstructor.geometry}
+                        onPointerOver={() => {
+                            document.body.style.cursor = "pointer";
+                            setMycolor((prev) => ({...prev, one: "black"}));
+                        }}
+                        onPointerOut={() => {
+                            document.body.style.cursor = "default";
+                            setMycolor((prev) => ({...prev, one: "gray"}))
+                        }}
+                        onClick={(e) => {
+                            navigate("projects")
+                        }}
+                    >
+                        <meshStandardMaterial
+                            color={mycolor.one}
+                            transparent={true}
+                            opacity={0.2}
+                            depthWrite={false}
+                        />
+                    </mesh>
+                    <mesh
+                        geometry={nodes.ramkafonstore.geometry}
+                        onPointerOver={() => {
+                            document.body.style.cursor = "pointer";
+                            setMycolor((prev) => ({...prev, two: "black"}));
+                        }}
+                        onPointerOut={() => {
+                            document.body.style.cursor = "default";
+                            setMycolor((prev) => ({...prev, two: "gray"}))
+                        }}
+                        onClick={(e) => {
+                            navigate("card")
+                        }}
+                    >
+                        <meshStandardMaterial
+                            color={mycolor.two}
+                            transparent={true}
+                            opacity={0.2}
+                            depthWrite={false}
+                        />
+                    </mesh>
+                    <mesh
+                        geometry={nodes.ramkafoncontacts.geometry}
+                        onPointerOver={() => {
+                            document.body.style.cursor = "pointer";
+                            setMycolor((prev) => ({...prev, three: "black"}));
+                        }}
+                        onPointerOut={() => {
+                            document.body.style.cursor = "default";
+                            setMycolor((prev) => ({...prev, three: "gray"}))
+                        }}
+                        onClick={(e) => {
+                            navigate("shop")
+                        }}
+                    >
+                        <meshStandardMaterial
+                            color={mycolor.three}
+                            transparent={true}
+                            opacity={0.2}
+                            depthWrite={false}
+                        />
                     </mesh>
                 </group>
+                <group ref={butRef}>
+                    <mesh
+                        geometry={nodes.ramkatext.geometry}
+                    >
+                        <meshStandardMaterial
+                            color="#000000"
+                        />
+                    </mesh>
+                </group>
+                <points>
+                    <bufferGeometry {...nodes.arrow.geometry} />
+                    <pointsMaterial
+                        transparent
+                        color="#41424C"
+                        size={0.1}
+                        sizeAttenuation={true}
+                        depthWrite={false}
+                        opacity={0.008} // Прозрачность
+                    />
+                </points>
+                <points>
+                    <bufferGeometry {...nodes.windows.geometry} />
+                    <pointsMaterial
+                        transparent
+                        color="#41424C"
+                        size={0.001}
+                        sizeAttenuation={true}
+                        depthWrite={false}
+                        opacity={0.003} // Прозрачность
+                    />
+                </points>
+                <group ref={deskRef}>
+                    <points>
+                        <bufferGeometry {...nodes.desk.geometry} />
+                        <pointsMaterial
+                            transparent
+                            color="#41424C"
+                            size={0.007}
+                            sizeAttenuation={true}
+                            depthWrite={false}
+                            opacity={0.05} // Прозрачность
+                        />
+                    </points>
+                </group>
 
-                {/*<group position={[11, 2, -42]} rotation-y={Math.PI / 2}>*/}
-                {/*    <mesh*/}
-                {/*        geometry={nodes.car2.geometry}*/}
-                {/*        position={[-9, -6, -4]}*/}
-                {/*        castShadow*/}
-                {/*        receiveShadow*/}
-                {/*    >*/}
-                {/*        <meshStandardMaterial*/}
-                {/*            color="black"*/}
-                {/*            // emissive="aqua"*/}
-                {/*            // emissiveIntensity={1}*/}
-                {/*            toneMapped={false}*/}
-                {/*        />*/}
-                {/*    </mesh>*/}
-                {/*</group>*/}
+                {/*<spotLight*/}
+                {/*    ref={spotLightRef}*/}
+                {/*    position={[4, 9, -0.7]}*/}
+                {/*    angle={0.23}*/}
+                {/*    penumbra={0.8}*/}
+                {/*    intensity={500}*/}
+                {/*    castShadow*/}
+                {/*    shadow-mapSize-width={1024}*/}
+                {/*    shadow-mapSize-height={1024}*/}
+                {/*    shadow-bias={-0.0001}*/}
+                {/*>*/}
+                {/*</spotLight>*/}
 
-                {/*<group position={[11, 2, -42]} rotation-y={Math.PI / 2}>*/}
-                {/*    <mesh*/}
-                {/*        geometry={nodes.plane.geometry}*/}
-                {/*        position={[-9, -6, -4]}*/}
-                {/*        castShadow*/}
-                {/*        receiveShadow*/}
-                {/*    >*/}
-                {/*        <meshStandardMaterial*/}
-                {/*            color="black"*/}
-                {/*            // emissive="aqua"*/}
-                {/*            // emissiveIntensity={1}*/}
-                {/*            toneMapped={true}*/}
-                {/*        />*/}
-                {/*    </mesh>*/}
-                {/*</group>*/}
+                {/*<pointLight*/}
+                {/*    visible={true}*/}
+                {/*    ref={pointLightRef}*/}
+                {/*    position={[1, -2, -1]}*/}
+                {/*    castShadow={true}*/}
+                {/*    intensity={1}*/}
+                {/*    power={1500}*/}
+                {/*    shadow-mapSize-width={1024}*/}
+                {/*    shadow-mapSize-height={1024}*/}
+                {/*    shadow-bias={-0.005}*/}
+                {/*/>*/}
 
-                {/*<group position-y={-2}>*/}
-                {/*    <mesh>*/}
-                {/*        <extrudeGeometry*/}
-                {/*            args={[*/}
-                {/*                shape,*/}
-                {/*                {*/}
-                {/*                    steps: LINE_NB_POINTS,*/}
-                {/*                    bevelEnabled: false,*/}
-                {/*                    extrudePath: curve,*/}
-                {/*                },*/}
-                {/*            ]}*/}
-                {/*        />*/}
-                {/*        <meshStandardMaterial color={"white"} opacity={0.7} transparent/>*/}
-                {/*    </mesh>*/}
-                {/*</group>*/}
+                {/*<pointLight*/}
+                {/*    visible={true}*/}
+                {/*    ref={pointLightRef}*/}
+                {/*    position={[4, -2, -1]}*/}
+                {/*    castShadow={true}*/}
+                {/*    intensity={1}*/}
+                {/*    power={1500}*/}
+                {/*    shadow-mapSize-width={1024}*/}
+                {/*    shadow-mapSize-height={1024}*/}
+                {/*    shadow-bias={-0.005}*/}
+                {/*/>*/}
 
-            </Suspense>
+                {/*<pointLight*/}
+                {/*    visible={true}*/}
+                {/*    position={[3.6, 4, -6]}*/}
+                {/*    castShadow={true}*/}
+                {/*    intensity={0.8}*/}
+                {/*    power={100}*/}
+                {/*    shadow-mapSize-width={1024}*/}
+                {/*    shadow-mapSize-height={1024}*/}
+                {/*    shadow-bias={-0.005}*/}
+                {/*/>*/}
+
+            </group>
         </>
     );
 };

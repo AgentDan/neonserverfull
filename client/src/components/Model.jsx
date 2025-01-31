@@ -7,20 +7,17 @@ const Model = ({currentElement, current}) => {
     const {nodes, materials} = useGLTF(`./models/${current.folder}/${current.file}.glb`)
     return (
         <>
-            <div className="z-10 absolute bg-transparent left-[15%] top-0 h-2/3 w-5/12">
                 <Suspense fallback={
                     <div className="content-center text-center h-96">
                         <Spin size="large"/>
                     </div>}
                 >
                     <Canvas camera={{fov: 14}}>
-
                         <Float
                             speed={1}
                             rotationIntensity={1}
                             floatIntensity={0.2}
                         >
-
                             <group scale={current.scale} rotation-y={2}>
                                 {currentElement !== "Complete" &&
                                     < Wireframe
@@ -53,7 +50,6 @@ const Model = ({currentElement, current}) => {
                                 )
                                 }
                             </group>
-
                             <OrbitControls
                                 maxPolarAngle={1.4}
                                 minPolarAngle={1.2}
@@ -65,8 +61,6 @@ const Model = ({currentElement, current}) => {
                         </Float>
                     </Canvas>
                 </Suspense>
-
-            </div>
         </>
     )
         ;

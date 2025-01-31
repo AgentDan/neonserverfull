@@ -1,6 +1,7 @@
 import React, {Suspense} from 'react';
 import {Environment, Html, useProgress} from "@react-three/drei";
 import Five from "./Five.jsx";
+import One from "./One.jsx";
 
 const Bubble = () => {
 
@@ -15,7 +16,8 @@ const Bubble = () => {
                 preset="apartment"
                 environmentIntensity={1}
             />
-            <Five/>
+            <One/>
+            {/*<Five/>*/}
         </Suspense>
     );
 };
