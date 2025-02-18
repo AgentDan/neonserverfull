@@ -7,8 +7,6 @@ import {AuthContext} from "../../context/AuthContext.js";
 
 const One = () => {
     const tl = useRef()
-    const tableRef = useRef()
-    const spotLightRef = useRef()
     const sceneRef = useRef()
     const cameraRef = useRef()
     const butRef = useRef()
@@ -268,7 +266,7 @@ const One = () => {
                             setMycolor((prev) => ({...prev, three: "gray"}))
                         }}
                         onClick={(e) => {
-                            navigate("shop")
+                            navigate("login")
                         }}
                     >
                         <meshStandardMaterial
@@ -323,54 +321,6 @@ const One = () => {
                         />
                     </points>
                 </group>
-
-                {/*<spotLight*/}
-                {/*    ref={spotLightRef}*/}
-                {/*    position={[4, 9, -0.7]}*/}
-                {/*    angle={0.23}*/}
-                {/*    penumbra={0.8}*/}
-                {/*    intensity={500}*/}
-                {/*    castShadow*/}
-                {/*    shadow-mapSize-width={1024}*/}
-                {/*    shadow-mapSize-height={1024}*/}
-                {/*    shadow-bias={-0.0001}*/}
-                {/*>*/}
-                {/*</spotLight>*/}
-
-                {/*<pointLight*/}
-                {/*    visible={true}*/}
-                {/*    ref={pointLightRef}*/}
-                {/*    position={[1, -2, -1]}*/}
-                {/*    castShadow={true}*/}
-                {/*    intensity={1}*/}
-                {/*    power={1500}*/}
-                {/*    shadow-mapSize-width={1024}*/}
-                {/*    shadow-mapSize-height={1024}*/}
-                {/*    shadow-bias={-0.005}*/}
-                {/*/>*/}
-
-                {/*<pointLight*/}
-                {/*    visible={true}*/}
-                {/*    ref={pointLightRef}*/}
-                {/*    position={[4, -2, -1]}*/}
-                {/*    castShadow={true}*/}
-                {/*    intensity={1}*/}
-                {/*    power={1500}*/}
-                {/*    shadow-mapSize-width={1024}*/}
-                {/*    shadow-mapSize-height={1024}*/}
-                {/*    shadow-bias={-0.005}*/}
-                {/*/>*/}
-
-                {/*<pointLight*/}
-                {/*    visible={true}*/}
-                {/*    position={[3.6, 4, -6]}*/}
-                {/*    castShadow={true}*/}
-                {/*    intensity={0.8}*/}
-                {/*    power={100}*/}
-                {/*    shadow-mapSize-width={1024}*/}
-                {/*    shadow-mapSize-height={1024}*/}
-                {/*    shadow-bias={-0.005}*/}
-                {/*/>*/}
 
             </group>
         </>
