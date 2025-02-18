@@ -343,4 +343,33 @@ export const store = [
             }
         ]
     },
+//-----------------------------------
+    {
+        id: v1(),
+        name: "box",
+        projects: [
+            {
+                id: v1(),
+                check: false,
+                nameProject: "MyHouse",
+                def: [
+                    {file: "boxDefoult0"},
+                    {file: "boxDefoult1"},
+                    {file: "boxDefoult2"},
+                ],
+                components: [
+                    {id: v1(), groupElements: 0, name: "boxKarkas0", file: "boxKarkas0", check: true},
+                    {id: v1(), groupElements: 0, name: "boxKarkas1", file: "boxKarkas1", check: false},
+                    {id: v1(), groupElements: 1, name: "boxOsb0", file: "boxOsb0", check: true},
+                    {id: v1(), groupElements: 1, name: "boxOsb1", file: "boxOsb1", check: false},
+                    {id: v1(), groupElements: 2, name: "boxOtdelka0", file: "boxOtdelka0", check: true},
+                    {id: v1(), groupElements: 2, name: "boxOtdelka1", file: "boxOtdelka1", check: false},
+                    {id: v1(), groupElements: 2, name: "boxOtdelka2", file: "boxOtdelka2", check: false},
+                    {id: v1(), groupElements: 2, name: "boxOtdelka3", file: "boxOtdelka3", check: false},
+                    {id: v1(), groupElements: 3, name: "boxRoof0", file: "boxRoof0", check: true},
+                    {id: v1(), groupElements: 3, name: "boxRoof1", file: "boxRoof1", check: false}
+                ]
+            }
+        ]
+    },
 ]
