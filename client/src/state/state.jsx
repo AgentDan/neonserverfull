@@ -360,14 +360,14 @@ export const store = [
                     {file: "boxDefoult4"},
                 ],
                 components: [
-                    {id: v1(), groupElements: 0, name: "boxKarkas0", file: "boxKarkas0", check: true},
-                    {id: v1(), groupElements: 0, name: "boxKarkas1", file: "boxKarkas1", check: false},
-                    {id: v1(), groupElements: 1, name: "boxOsb0", file: "boxOsb0", check: true},
-                    {id: v1(), groupElements: 1, name: "boxOsb1", file: "boxOsb1", check: false},
-                    {id: v1(), groupElements: 2, name: "boxOtdelka2", file: "boxOtdelka2", check: true},
-                    {id: v1(), groupElements: 2, name: "boxOtdelka3", file: "boxOtdelka3", check: false},
-                    {id: v1(), groupElements: 3, name: "boxRoof0", file: "boxRoof0", check: true},
-                    {id: v1(), groupElements: 3, name: "boxRoof1", file: "boxRoof1", check: false}
+                    {id: v1(), groupElements: 3, name: "boxKarkas0", file: "boxKarkas0", check: true},
+                    {id: v1(), groupElements: 3, name: "boxKarkas1", file: "boxKarkas1", check: false},
+                    {id: v1(), groupElements: 2, name: "boxOsb0", file: "boxOsb0", check: true},
+                    {id: v1(), groupElements: 2, name: "boxOsb1", file: "boxOsb1", check: false},
+                    {id: v1(), groupElements: 1, name: "boxOtdelka2", file: "boxOtdelka2", check: true},
+                    {id: v1(), groupElements: 1, name: "boxOtdelka3", file: "boxOtdelka3", check: false},
+                    {id: v1(), groupElements: 0, name: "boxRoof0", file: "boxRoof0", check: true},
+                    {id: v1(), groupElements: 0, name: "boxRoof1", file: "boxRoof1", check: false}
                 ]
             }
         ]
