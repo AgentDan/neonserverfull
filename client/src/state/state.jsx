@@ -344,30 +344,64 @@ export const store = [
         ]
     },
 //-----------------------------------
+//     {
+//         id: v1(),
+//         name: "box",
+//         projects: [
+//             {
+//                 id: v1(),
+//                 check: false,
+//                 nameProject: "MyHouse",
+//                 def: [
+//                     {file: "boxDefoult0"},
+//                     {file: "boxDefoult1"},
+//                     {file: "boxDefoult2"},
+//                     {file: "boxDefoult3"},
+//                     {file: "boxDefoult4"},
+//                 ],
+//                 components: [
+//                     {id: v1(), groupElements: 3, name: "boxKarkas0", file: "boxKarkas0", check: true},
+//                     {id: v1(), groupElements: 3, name: "boxKarkas1", file: "boxKarkas1", check: false},
+//                     {id: v1(), groupElements: 2, name: "boxOsb0", file: "boxOsb0", check: true},
+//                     {id: v1(), groupElements: 2, name: "boxOsb1", file: "boxOsb1", check: false},
+//                     {id: v1(), groupElements: 1, name: "boxOtdelka2", file: "boxOtdelka2", check: true},
+//                     {id: v1(), groupElements: 1, name: "boxOtdelka3", file: "boxOtdelka3", check: false},
+//                     {id: v1(), groupElements: 0, name: "boxRoof0", file: "boxRoof0", check: true},
+//                     {id: v1(), groupElements: 0, name: "boxRoof1", file: "boxRoof1", check: false}
+//                 ]
+//             }
+//         ]
+//     },
     {
         id: v1(),
         name: "box",
         projects: [
             {
                 id: v1(),
-                check: false,
-                nameProject: "MyHouse",
+                check: true,
+                nameProject: "var1",
                 def: [
-                    {file: "boxDefoult0"},
-                    {file: "boxDefoult1"},
-                    {file: "boxDefoult2"},
-                    {file: "boxDefoult3"},
-                    {file: "boxDefoult4"},
+                    {file: "awingDefoult"},
+                    {file: "awingVar1Defoult1"},
+                    {file: "awingVar1Defoult2"},
                 ],
                 components: [
-                    {id: v1(), groupElements: 3, name: "boxKarkas0", file: "boxKarkas0", check: true},
-                    {id: v1(), groupElements: 3, name: "boxKarkas1", file: "boxKarkas1", check: false},
-                    {id: v1(), groupElements: 2, name: "boxOsb0", file: "boxOsb0", check: true},
-                    {id: v1(), groupElements: 2, name: "boxOsb1", file: "boxOsb1", check: false},
-                    {id: v1(), groupElements: 1, name: "boxOtdelka2", file: "boxOtdelka2", check: true},
-                    {id: v1(), groupElements: 1, name: "boxOtdelka3", file: "boxOtdelka3", check: false},
-                    {id: v1(), groupElements: 0, name: "boxRoof0", file: "boxRoof0", check: true},
-                    {id: v1(), groupElements: 0, name: "boxRoof1", file: "boxRoof1", check: false}
+                    {id: v1(), groupElements: 0, name: "awingWallOne", file: "awingWallOne", check: true},
+                    {id: v1(), groupElements: 0, name: "awingWallTwo", file: "awingWallTwo", check: false},
+                ]
+            },
+            {
+                id: v1(),
+                check: false,
+                nameProject: "var2",
+                def: [
+                    {file: "awingDefoult"},
+                    {file: "awingVar2Defoult1"},
+                    {file: "awingVar2Defoult2"},
+                ],
+                components: [
+                    {id: v1(), groupElements: 0, name: "awingWallOne", file: "awingWallOne", check: true},
+                    {id: v1(), groupElements: 0, name: "awingWallTwo", file: "awingWallTwo", check: false},
                 ]
             }
         ]
