@@ -378,7 +378,7 @@ export const store = [
         projects: [
             {
                 id: v1(),
-                check: true,
+                check: false,
                 nameProject: "var1",
                 def: [
                     {file: "awingDefoult"},
