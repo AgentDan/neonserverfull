@@ -379,7 +379,7 @@ export const store = [
             {
                 id: v1(),
                 check: false,
-                nameProject: "var1",
+                nameProject: "var1 h=2500mm.",
                 def: [
                     {file: "awingDefoult"},
                     {file: "awingVar1Defoult1"},
@@ -393,7 +393,7 @@ export const store = [
             {
                 id: v1(),
                 check: false,
-                nameProject: "var2",
+                nameProject: "var2 h=3000mm.",
                 def: [
                     {file: "awingDefoult"},
                     {file: "awingVar2Defoult1"},
