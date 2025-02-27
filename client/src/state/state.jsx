@@ -403,6 +403,20 @@ export const store = [
                     {id: v1(), groupElements: 0, name: "awingWallOne", file: "awingWallOne", check: true},
                     {id: v1(), groupElements: 0, name: "awingWallTwo", file: "awingWallTwo", check: false},
                 ]
+            },
+            {
+                id: v1(),
+                check: false,
+                nameProject: "var3",
+                def: [
+                    {file: "awingDefoult"},
+                    {file: "awingVar3Defoult1"},
+                    {file: "awingVar3Defoult2"},
+                ],
+                components: [
+                    {id: v1(), groupElements: 0, name: "awingWallOne", file: "awingWallOne", check: true},
+                    {id: v1(), groupElements: 0, name: "awingWallTwo", file: "awingWallTwo", check: false},
+                ]
             }
         ]
     },
